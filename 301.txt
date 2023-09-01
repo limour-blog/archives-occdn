@@ -1,0 +1,9 @@
+location = /1541.html {
+    return 301 https://hexo.limour.top/-qian-yi-CellTypist-zhu-shi-mian-yi-xi-bao-ya-qun;
+}
+location = /1539.html {
+    return 301 https://hexo.limour.top/-qian-yi-CellTypist-zhu-shi-mian-yi-xi-bao-ya-qun;
+}
+location = /2725.html {
+    return 301 https://x.limour.top/bo-ke-qian-yi-dao-xLog-liu-cheng-ji-lu;
+}
