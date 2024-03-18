@@ -1,0 +1,731 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head><!-- hexo injector head_begin start -->
+  <script async src="https://analytics.umami.is/script.js" data-website-id="e59ec28a-c9a7-4104-9e62-a9f7eb3fac0b"></script>
+<!-- hexo injector head_begin end -->
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://img.limour.top/2023/08/29/64ee07361815a.webp">
+  <link rel="icon" href="https://img.limour.top/2023/08/29/64ee07361815a.webp">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Limour">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="第一步 添加SWAP wget -O box.sh https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;BlueSkyXN&#x2F;SKY-BOX&#x2F;main&#x2F;box.sh &amp;&amp; chmod +x box.sh &amp;&amp; clear &amp;&amp; sudo .&#x2F;box.sh 大小输入4096，设置4G大小的swap空间  第二步 安装docker">
+<meta property="og:type" content="article">
+<meta property="og:title" content="阿里云香港轻量应用服务器使用记录">
+<meta property="og:url" content="https://occdn.limour.top/1997.html">
+<meta property="og:site_name" content="Limour&#39;s Blog">
+<meta property="og:description" content="第一步 添加SWAP wget -O box.sh https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;BlueSkyXN&#x2F;SKY-BOX&#x2F;main&#x2F;box.sh &amp;&amp; chmod +x box.sh &amp;&amp; clear &amp;&amp; sudo .&#x2F;box.sh 大小输入4096，设置4G大小的swap空间  第二步 安装docker">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-07-06T22:31:59.000Z">
+<meta property="article:modified_time" content="2024-03-18T11:56:18.977Z">
+<meta property="article:author" content="Limour">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>阿里云香港轻量应用服务器使用记录 - Limour&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://jscdn.limour.top/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://jscdn.limour.top/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://jscdn.limour.top/npm/hint.css@2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/theme-inject/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"occdn.limour.top","root":"/","version":"1.9.5-a","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"§"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"https://jscdn.limour.top/gh/Limour-dev/Sakurairo_Vision/load_svg/inload.svg","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Limour&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://img.limour.top/2023/08/29/64ee08e108638.webp') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="阿里云香港轻量应用服务器使用记录"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-07-07 06:31" pubdate>
+          July 7, 2022 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4.7k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          39 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">阿里云香港轻量应用服务器使用记录</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="第一步-添加SWAP"><a href="#第一步-添加SWAP" class="headerlink" title="第一步 添加SWAP"></a>第一步 添加SWAP</h2><ul>
+<li>wget -O box.sh <a href="https://occdn.limour.top/go/#aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL0JsdWVTa3lYTi9TS1ktQk9YL21haW4vYm94LnNo" rel="noopener external nofollow noreferrer">https://raw.githubusercontent.com/BlueSkyXN/SKY-BOX/main/box.sh</a> &amp;&amp; chmod +x box.sh &amp;&amp; clear &amp;&amp; sudo .&#x2F;box.sh</li>
+<li>大小输入4096，设置4G大小的swap空间</li>
+</ul>
+<h2 id="第二步-安装docker"><a href="#第二步-安装docker" class="headerlink" title="第二步 安装docker"></a>第二步 安装docker</h2><ul>
+<li>sudo apt update</li>
+<li>sudo apt install apt-transport-https ca-certificates curl gnupg-agent software-properties-common</li>
+<li>curl -fsSL <a href="https://occdn.limour.top/go/#aHR0cHM6Ly9kb3dubG9hZC5kb2NrZXIuY29tL2xpbnV4L3VidW50dS9ncGc=" rel="noopener external nofollow noreferrer">https://download.docker.com/linux/ubuntu/gpg</a> sudo apt-key add -</li>
+<li>sudo add-apt-repository “deb [arch&#x3D;amd64] <a href="https://occdn.limour.top/go/#aHR0cHM6Ly9kb3dubG9hZC5kb2NrZXIuY29tL2xpbnV4L3VidW50dQ==" rel="noopener external nofollow noreferrer">https://download.docker.com/linux/ubuntu</a> $(lsb_release -cs) stable”</li>
+<li>sudo apt update</li>
+<li>sudo apt install docker-ce</li>
+<li>sudo systemctl status docker</li>
+<li>sudo curl -L “<a href="https://occdn.limour.top/go/#aHR0cHM6Ly9naXRodWIuY29tL2RvY2tlci9jb21wb3NlL3JlbGVhc2VzL2Rvd25sb2FkL3YyLjYuMS9kb2NrZXItY29tcG9zZS0k" rel="noopener external nofollow noreferrer">https://github.com/docker/compose/releases/download/v2.6.1/docker-compose-$</a>(uname -s)-$(uname -m)” -o &#x2F;usr&#x2F;local&#x2F;bin&#x2F;docker-compose</li>
+<li>sudo chmod +x &#x2F;usr&#x2F;local&#x2F;bin&#x2F;docker-compose</li>
+<li>docker-compose –version</li>
+</ul>
+<h2 id="第三步-docker安装NPM面板"><a href="#第三步-docker安装NPM面板" class="headerlink" title="第三步 docker安装NPM面板"></a>第三步 docker安装NPM面板</h2><ul>
+<li>mkdir ngpm &amp;&amp; cd ngpm</li>
+<li>nano docker-compose.yml</li>
+<li>sudo docker-compose up -d</li>
+</ul>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3&#x27;</span><br><span class="hljs-attr">services:</span><br>  <span class="hljs-attr">app:</span><br>    <span class="hljs-attr">image:</span> <span class="hljs-string">&#x27;jc21/nginx-proxy-manager:latest&#x27;</span><br>    <span class="hljs-attr">restart:</span> <span class="hljs-string">unless-stopped</span><br>    <span class="hljs-attr">ports:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">&#x27;80:80&#x27;</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">&#x27;81:81&#x27;</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">&#x27;443:443&#x27;</span><br>    <span class="hljs-attr">volumes:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">./data:/data</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">./letsencrypt:/etc/letsencrypt</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>控制台防火墙开放81端口</li>
+<li>登录到 <a href="https://occdn.limour.top/go/#aHR0cDovL2lwOjgxLw==" rel="noopener external nofollow noreferrer">http://ip:81</a></li>
+<li>Email: <a href="mailto:&#97;&#100;&#109;&#x69;&#110;&#x40;&#101;&#x78;&#x61;&#x6d;&#112;&#108;&#x65;&#46;&#x63;&#x6f;&#x6d;">&#97;&#100;&#109;&#x69;&#110;&#x40;&#101;&#x78;&#x61;&#x6d;&#112;&#108;&#x65;&#46;&#x63;&#x6f;&#x6d;</a></li>
+<li>Password: changeme</li>
+<li>sudo ip addr show docker0</li>
+<li>反代 Nginx Proxy Manager</li>
+<li>示例：<a href="https://occdn.limour.top/go/#aHR0cHM6Ly9ucG0yLmoxMS5mdW4v" rel="noopener external nofollow noreferrer">https://npm2.j11.fun/</a></li>
+<li>控制台防火墙开关闭81端口</li>
+</ul>
+<h2 id="第四步-启用rc-local"><a href="#第四步-启用rc-local" class="headerlink" title="第四步 启用rc.local"></a>第四步 启用rc.local</h2><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-section">[Unit]</span><br><span class="hljs-attr">Description</span>=/etc/rc.local Compatibility <br><span class="hljs-attr">ConditionPathExists</span>=/etc/rc.local <br><br><span class="hljs-section">[Service]</span><br><span class="hljs-attr">Type</span>=forking <br><span class="hljs-attr">ExecStart</span>=/etc/rc.local start <br><span class="hljs-attr">TimeoutSec</span>=<span class="hljs-number">0</span> <br><span class="hljs-attr">StandardOutput</span>=tty <br><span class="hljs-attr">RemainAfterExit</span>=<span class="hljs-literal">yes</span> <br><span class="hljs-attr">SysVStartPriority</span>=<span class="hljs-number">99</span> <br><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>sudo nano &#x2F;etc&#x2F;systemd&#x2F;system&#x2F;rc-local.service</li>
+<li>sudo nano &#x2F;etc&#x2F;rc.local</li>
+<li>sudo chmod +x &#x2F;etc&#x2F;rc.local</li>
+<li>sudo systemctl enable rc-local</li>
+<li>sudo systemctl start rc-local.service</li>
+<li>sudo systemctl status rc-local.service</li>
+<li>cat &#x2F;tmp&#x2F;added_script.log</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-meta">#!/bin/sh -e </span><br><span class="hljs-comment">## rc.local</span><br><span class="hljs-comment">#start script</span><br> <br><span class="hljs-comment">#end script</span><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;added sucessfully!&quot;</span> &gt; /tmp/added_script.log <br><span class="hljs-built_in">exit</span> 0<br></code></pre></td></tr></table></figure>
+
+<h2 id="第五步-关闭阿里云盾"><a href="#第五步-关闭阿里云盾" class="headerlink" title="第五步 关闭阿里云盾"></a>第五步 关闭阿里云盾</h2><ul>
+<li>按此操作关闭云盾 <a href="https://occdn.limour.top/go/#aHR0cHM6Ly9oZWxwLmFsaXl1bi5jb20vZG9jdW1lbnRfZGV0YWlsLzMxNzc3Lmh0bWw=" rel="noopener external nofollow noreferrer">https://help.aliyun.com/document_detail&#x2F;31777.html</a></li>
+<li>wget <a href="https://occdn.limour.top/go/#aHR0cDovL3VwZGF0ZS5hZWdpcy5hbGl5dW4uY29tL2Rvd25sb2FkL3VuaW5zdGFsbC5zaA==" rel="noopener external nofollow noreferrer">http://update.aegis.aliyun.com/download/uninstall.sh</a> &amp;&amp; chmod +x uninstall.sh &amp;&amp;.&#x2F;uninstall.sh</li>
+<li>wget <a href="https://occdn.limour.top/go/#aHR0cDovL3VwZGF0ZS5hZWdpcy5hbGl5dW4uY29tL2Rvd25sb2FkL3F1YXJ0ei9fdW5pbnN0YWxsLnNo" rel="noopener external nofollow noreferrer">http://update.aegis.aliyun.com/download/quartz\_uninstall.sh</a> &amp;&amp; chmod +x quartz_uninstall.sh &amp;&amp; .&#x2F;quartz_uninstall.sh</li>
+<li>sudo rm -r &#x2F;usr&#x2F;local&#x2F;aegis</li>
+<li>sudo systemctl disable aliyun.service</li>
+<li>sudo rm &#x2F;usr&#x2F;sbin&#x2F;aliyun-service</li>
+<li>sudo rm &#x2F;usr&#x2F;sbin&#x2F;aliyun-service.backup</li>
+<li>sudo rm &#x2F;usr&#x2F;sbin&#x2F;aliyun_installer</li>
+<li>sudo rm &#x2F;etc&#x2F;systemd&#x2F;system&#x2F;aliyun.service</li>
+<li>sudo rm &#x2F;lib&#x2F;systemd&#x2F;system&#x2F;aliyun.service</li>
+<li>rm uninstall.sh quartz_uninstall.sh</li>
+<li>ARCH&#x3D;amd64</li>
+<li>&#x2F;usr&#x2F;local&#x2F;cloudmonitor&#x2F;CmsGoAgent.linux-${ARCH} uninstall</li>
+<li>&#x2F;usr&#x2F;local&#x2F;cloudmonitor&#x2F;CmsGoAgent.linux-${ARCH} stop</li>
+<li>&#x2F;usr&#x2F;local&#x2F;cloudmonitor&#x2F;CmsGoAgent.linux-${ARCH} stop</li>
+<li>&#x2F;usr&#x2F;local&#x2F;cloudmonitor&#x2F;CmsGoAgent.linux-${ARCH} uninstall</li>
+<li>rm -rf &#x2F;usr&#x2F;local&#x2F;cloudmonitor</li>
+<li>pkill aliyun-service</li>
+<li>rm -fr &#x2F;etc&#x2F;init.d&#x2F;agentwatch &#x2F;usr&#x2F;sbin&#x2F;aliyun-service</li>
+<li>rm -rf &#x2F;usr&#x2F;local&#x2F;aegis*</li>
+<li>ps -aux grep -E ‘aliyunAliYunDun’</li>
+</ul>
+<h2 id="第六步-屏蔽阿里云盾IP"><a href="#第六步-屏蔽阿里云盾IP" class="headerlink" title="第六步 屏蔽阿里云盾IP"></a>第六步 屏蔽<strong>阿里云盾IP</strong></h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-meta">#!/bin/bash</span><br>/usr/sbin/iptables -F<br>/usr/sbin/ip6tables -F<br>/usr/sbin/iptables -I INPUT -s 140.205.201.0/28 -j DROP<br>/usr/sbin/iptables -I INPUT -s 140.205.201.16/29 -j DROP<br>/usr/sbin/iptables -I INPUT -s 140.205.201.32/28 -j DROP<br>/usr/sbin/iptables -I INPUT -s 140.205.225.192/29 -j DROP<br>/usr/sbin/iptables -I INPUT -s 140.205.225.200/30 -j DROP<br>/usr/sbin/iptables -I INPUT -s 140.205.225.184/29 -j DROP<br>/usr/sbin/iptables -I INPUT -s 140.205.225.183/32 -j DROP<br>/usr/sbin/iptables -I INPUT -s 140.205.225.206/32 -j DROP<br>/usr/sbin/iptables -I INPUT -s 140.205.225.205/32 -j DROP<br>/usr/sbin/iptables -I INPUT -s 140.205.225.195/32 -j DROP<br>/usr/sbin/iptables -I INPUT -s 140.205.225.204/32 -j DROP<br>/usr/sbin/iptables -A INPUT -i lo -j ACCEPT<br>/usr/sbin/iptables -A OUTPUT -o lo -j ACCEPT<br>/usr/sbin/ip6tables -A INPUT -i lo -j ACCEPT<br>/usr/sbin/ip6tables -A OUTPUT -o lo -j ACCEPT<br>/usr/sbin/iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT<br>/usr/sbin/iptables -A OUTPUT -m state --state ESTABLISHED,RELATED -j ACCEPT<br>/usr/sbin/ip6tables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT<br>/usr/sbin/ip6tables -A OUTPUT -m state --state ESTABLISHED,RELATED -j ACCEPT<br>/usr/sbin/iptables -A INPUT -p tcp ! --dport 22 -j DROP<br>/usr/sbin/ip6tables -A INPUT -p tcp ! --dport 22 -j DROP<br>/usr/sbin/iptables -I INPUT -s 172.16.0.0/12 -j ACCEPT<br>/usr/sbin/iptables -I OUTPUT -s 172.16.0.0/12 -j ACCEPT<br>/usr/sbin/iptables -I INPUT -p tcp -m multiport --dports 80,443,8024 -j ACCEPT<br>/usr/sbin/iptables -I INPUT -p udp --dport 6000:6002 -j ACCEPT<br>/usr/sbin/iptables -I INPUT -p tcp --dport 21000:22000 -j ACCEPT<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>nano noyd.sh &amp;&amp; chmod +x noyd.sh</li>
+<li>将 noyd.sh 添加到第四步的rc.local里执行</li>
+<li>reboot</li>
+<li>iptables -L</li>
+<li>ps -aux grep -E ‘aliyunAliYunDun’</li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%BF%90%E7%BB%B4/" class="category-chain-item">运维</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>阿里云香港轻量应用服务器使用记录</div>
+      <div>https://occdn.limour.top/1997.html</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>Limour</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>July 7, 2022</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="NC - Non-commercial">
+                    <i class="iconfont icon-nc"></i>
+                  </span>
+                </a>
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="SA - Share-alike">
+                    <i class="iconfont icon-sa"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/1999.html" title="Docker：安装nps服务端与客户端">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Docker：安装nps服务端与客户端</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/1956.html" title="cBioPortal的原始数据获取">
+                        <span class="hidden-mobile">cBioPortal的原始数据获取</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="waline"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#waline', function() {
+      Fluid.utils.createCssLink('https://cdn.staticfile.org/waline/2.15.5/waline.min.css')
+      Fluid.utils.createScript('https://cdn.staticfile.org/waline/2.15.5/waline.min.js', function() {
+        var options = Object.assign(
+          {"serverURL":"https://comments.limour.top","path":"window.location.pathname","meta":["nick","mail","link"],"requiredMeta":["nick"],"lang":"zh-CN","emoji":["https://jscdn.limour.top/gh/walinejs/emojis/weibo"],"dark":"html[data-user-color-scheme=\"dark\"]","wordLimit":0,"pageSize":10},
+          {
+            el: '#waline',
+            path: window.location.pathname
+          }
+        )
+        Waline.init(options);
+        Fluid.utils.waitElementVisible('#waline .vcontent', () => {
+          var imgSelector = '#waline .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a target="_blank" rel="nofollow noopener" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=43130202000203"><img src="https://img.limour.top/2023/08/27/64eadeb81d6a0.webp" srcset="https://jscdn.limour.top/gh/Limour-dev/Sakurairo_Vision/load_svg/inload.svg" lazyload>湘公网安备 43130202000203号  </a> <a target="_blank" rel="nofollow noopener" href="https://beian.miit.gov.cn/">湘ICP备20008299号 </a> <a target="_blank" rel="nofollow noopener" href="https://icp.gov.moe/?keyword=20210128">萌ICP备20210128号</a> <br> <a href="https://www.foreverblog.cn/" target="_blank"> <img src="https://img.foreverblog.cn/logo_en_default.png" srcset="https://jscdn.limour.top/gh/Limour-dev/Sakurairo_Vision/load_svg/inload.svg" lazyload alt="" style="width:auto;height:24px"> </a> <br> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/limour-blog/archives-occdn" target="_blank" rel="nofollow noopener"><span>SRC</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://jscdn.limour.top/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://jscdn.limour.top/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://jscdn.limour.top/npm/jquery@3.6.4/dist/jquery.min.js" ></script>
+<script  src="https://jscdn.limour.top/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://jscdn.limour.top/npm/tocbot@4.20.1/dist/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://jscdn.limour.top/npm/anchor-js@4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+<!-- hexo injector body_end start -->
+  <script defer src="/theme-inject/timeliness.js"></script>
+<!-- hexo injector body_end end --></body>
+</html>

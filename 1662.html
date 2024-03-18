@@ -1,0 +1,702 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head><!-- hexo injector head_begin start -->
+  <script async src="https://analytics.umami.is/script.js" data-website-id="e59ec28a-c9a7-4104-9e62-a9f7eb3fac0b"></script>
+<!-- hexo injector head_begin end -->
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://img.limour.top/2023/08/29/64ee07361815a.webp">
+  <link rel="icon" href="https://img.limour.top/2023/08/29/64ee07361815a.webp">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Limour">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="流程：https:&#x2F;&#x2F;docs.gdc.cancer.gov&#x2F;Data&#x2F;Bioinformatics_Pipelines&#x2F;Expression_mRNA_Pipeline&#x2F; 第一步 安装必要的软件 conda create -n star -c bioconda star -y conda activate star conda install -c bioconda sam">
+<meta property="og:type" content="article">
+<meta property="og:title" content="按TCGA的STAR流程处理组织高通量测序数据">
+<meta property="og:url" content="https://occdn.limour.top/1662.html">
+<meta property="og:site_name" content="Limour&#39;s Blog">
+<meta property="og:description" content="流程：https:&#x2F;&#x2F;docs.gdc.cancer.gov&#x2F;Data&#x2F;Bioinformatics_Pipelines&#x2F;Expression_mRNA_Pipeline&#x2F; 第一步 安装必要的软件 conda create -n star -c bioconda star -y conda activate star conda install -c bioconda sam">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://img.limour.top/archives_2023/blog/20220404172423.webp">
+<meta property="og:image" content="https://img.limour.top/archives_2023/blog/20220405043153.webp">
+<meta property="article:published_time" content="2022-04-06T02:00:14.000Z">
+<meta property="article:modified_time" content="2024-03-18T11:56:18.949Z">
+<meta property="article:author" content="Limour">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://img.limour.top/archives_2023/blog/20220404172423.webp">
+  
+  
+  
+  <title>按TCGA的STAR流程处理组织高通量测序数据 - Limour&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://jscdn.limour.top/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://jscdn.limour.top/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://jscdn.limour.top/npm/hint.css@2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/theme-inject/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"occdn.limour.top","root":"/","version":"1.9.5-a","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":"§"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"https://jscdn.limour.top/gh/Limour-dev/Sakurairo_Vision/load_svg/inload.svg","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Limour&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://img.limour.top/2023/08/29/64ee08e108638.webp') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="按TCGA的STAR流程处理组织高通量测序数据"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-04-06 10:00" pubdate>
+          April 6, 2022 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          6.1k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          51 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">按TCGA的STAR流程处理组织高通量测序数据</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p><img src="https://img.limour.top/archives_2023/blog/20220404172423.webp" srcset="https://jscdn.limour.top/gh/Limour-dev/Sakurairo_Vision/load_svg/inload.svg" lazyload></p>
+<p>流程：<a href="https://occdn.limour.top/go/#aHR0cHM6Ly9kb2NzLmdkYy5jYW5jZXIuZ292L0RhdGEvQmlvaW5mb3JtYXRpY3NfUGlwZWxpbmVzL0V4cHJlc3Npb25fbVJOQV9QaXBlbGluZS8=" rel="noopener external nofollow noreferrer">https://docs.gdc.cancer.gov/Data/Bioinformatics_Pipelines&#x2F;Expression_mRNA_Pipeline&#x2F;</a></p>
+<h2 id="第一步-安装必要的软件"><a href="#第一步-安装必要的软件" class="headerlink" title="第一步 安装必要的软件"></a>第一步 安装必要的软件</h2><ul>
+<li>conda create -n star -c bioconda star -y</li>
+<li><strong>conda activate star</strong></li>
+<li>conda install -c bioconda samtools -y</li>
+</ul>
+<p>说明书：<a href="https://occdn.limour.top/go/#aHR0cHM6Ly9naXRodWIuY29tL2FsZXhkb2Jpbi9TVEFSL2Jsb2IvbWFzdGVyL2RvYy9TVEFSbWFudWFsLnBkZg==" rel="noopener external nofollow noreferrer">https://github.com/alexdobin/STAR/blob/master/doc/STARmanual.pdf</a></p>
+<h2 id="第二步-建立基因组索引"><a href="#第二步-建立基因组索引" class="headerlink" title="第二步 建立基因组索引"></a>第二步 建立<strong>基因组</strong>索引</h2><ul>
+<li>wget <a href="https://occdn.limour.top/go/#aHR0cHM6Ly9hcGkuZ2RjLmNhbmNlci5nb3YvZGF0YS8wN2YyZGNhOS1jZDM5LTRjYmYtOTBkMi1jN2ExYjhkZjUxMzk=" rel="noopener external nofollow noreferrer">https://api.gdc.cancer.gov/data/07f2dca9-cd39-4cbf-90d2-c7a1b8df5139</a> -O star-2.7.5c_GRCh38.d1.vd1_gencode.v36.tgz</li>
+<li>tar -zxvf star-2.7.5c_GRCh38.d1.vd1_gencode.v36.tgz</li>
+<li>上面的原始文件已经损坏了！</li>
+</ul>
+<p>地址：<a href="https://occdn.limour.top/go/#aHR0cHM6Ly9nZGMuY2FuY2VyLmdvdi9hYm91dC1kYXRhL2dkYy1kYXRhLXByb2Nlc3NpbmcvZ2RjLXJlZmVyZW5jZS1maWxlcw==" rel="noopener external nofollow noreferrer">https://gdc.cancer.gov/about-data/gdc-data-processing/gdc-reference-files</a></p>
+<p>如果要自己构建，可以使用 zcat R1.fq.gz head 来查看reads长度，选用reads长度减1（149）作为 <strong>--sjdbOverhang</strong> 比默认的100要好，但是说明里认为绝大多数情况下100和理想值差不多<br><a href="https://occdn.limour.top/go/#aHR0cHM6Ly93d3cuZ2VuY29kZWdlbmVzLm9yZy9odW1hbi9yZWxlYXNlXzM2Lmh0bWw=" rel="noopener external nofollow noreferrer">https://www.gencodegenes.org/human/release_36.html</a></p>
+<ul>
+<li>wget <a href="https://occdn.limour.top/go/#aHR0cHM6Ly9mdHAuZWJpLmFjLnVrL3B1Yi9kYXRhYmFzZXMvZ2VuY29kZS9HZW5jb2RlL19odW1hbi9yZWxlYXNlL18zNi9HUkNoMzgucHJpbWFyeS9fYXNzZW1ibHkuZ2Vub21lLmZhLmd6" rel="noopener external nofollow noreferrer">https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode\_human/release\_36/GRCh38.primary\_assembly.genome.fa.gz</a></li>
+<li>wget <a href="https://occdn.limour.top/go/#aHR0cHM6Ly9mdHAuZWJpLmFjLnVrL3B1Yi9kYXRhYmFzZXMvZ2VuY29kZS9HZW5jb2RlL19odW1hbi9yZWxlYXNlL18zNi9nZW5jb2RlLnYzNi5wcmltYXJ5L19hc3NlbWJseS5hbm5vdGF0aW9uLmd0Zi5neg==" rel="noopener external nofollow noreferrer">https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode\_human/release\_36/gencode.v36.primary\_assembly.annotation.gtf.gz</a></li>
+<li>mkdir index_150</li>
+<li>gunzip gencode.v36.primary_assembly.annotation.gtf.gz</li>
+<li>gunzip GRCh38.primary_assembly.genome.fa.gz</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs shell">STAR \<br>--runMode genomeGenerate \<br>--genomeDir index_150 \<br>--genomeFastaFiles GRCh38.primary_assembly.genome.fa \<br>--sjdbOverhang 149 \<br>--sjdbGTFfile gencode.v36.primary_assembly.annotation.gtf \<br>--runThreadN 8<br></code></pre></td></tr></table></figure>
+
+<h2 id="第三步-第一次对比"><a href="#第三步-第一次对比" class="headerlink" title="第三步 第一次对比"></a>第三步 第一次对比</h2><p><img src="https://img.limour.top/archives_2023/blog/20220405043153.webp" srcset="https://jscdn.limour.top/gh/Limour-dev/Sakurairo_Vision/load_svg/inload.svg" lazyload></p>
+<p>CleanData存放格式</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">#</span><span class="language-bash">!/bin/sh</span><br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">设置CleanData存放目录</span><br>CLEAN=/home/jovyan/upload/yy_zhang（备份）/RNA-seq/Cleandata<br><span class="hljs-meta prompt_">#</span><span class="language-bash">设置这一步的输出目录 (确保目录存在)</span><br>WORK=/home/jovyan/upload/zl_liu/star_data/yyz_01/output<br><span class="hljs-meta prompt_">#</span><span class="language-bash">设置index目录</span><br>INDEX=/home/jovyan/upload/zl_liu/star/index_150<br><span class="hljs-meta prompt_">#</span><span class="language-bash">设置参考文件目录</span><br>Reference=/home/jovyan/upload/zl_liu/star<br><br>echo $CLEAN&quot;, &quot;$WORK&quot;, &quot;$INDEX<br><br>export CDIR=$(basename `pwd`)<br>echo $CDIR<br>echo $CLEAN<br>for file in $CLEAN/*<br>do<br>echo $file<br>SAMPLE=$&#123;file##*/&#125;<br>echo $SAMPLE<br>r1=$&#123;SAMPLE&#125;&quot;_R1.fq.gz&quot;<br>r2=$&#123;SAMPLE&#125;&quot;_R2.fq.gz&quot;<br>echo $r1<br>echo $r2<br>mkdir $WORK&quot;/&quot;$SAMPLE<br>cd $WORK&quot;/&quot;$SAMPLE<br><br>STAR \<br>--genomeDir $INDEX \<br>--readFilesIn $CLEAN/$SAMPLE/$r1&quot;,&quot;$CLEAN/$SAMPLE/$r2 \<br>--runThreadN 4 \<br>--outFilterMultimapScoreRange 1 \<br>--outFilterMultimapNmax 20 \<br>--outFilterMismatchNmax 10 \<br>--alignIntronMax 500000 \<br>--alignMatesGapMax 1000000 \<br>--sjdbScore 2 \<br>--alignSJDBoverhangMin 1 \<br>--genomeLoad LoadAndRemove \<br>--readFilesCommand zcat \<br>--outFilterMatchNminOverLread 0.33 \<br>--outFilterScoreMinOverLread 0.33 \<br>--sjdbOverhang 149 \<br>--outSAMstrandField intronMotif \<br>--outSAMtype None \<br>--outSAMmode None \<br><br>done<br></code></pre></td></tr></table></figure>
+
+<h2 id="第四步-建立中间索引"><a href="#第四步-建立中间索引" class="headerlink" title="第四步 建立中间索引"></a>第四步 建立中间索引</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">#</span><span class="language-bash">!/bin/sh</span><br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">设置CleanData存放目录</span><br>CLEAN=/home/jovyan/upload/yy_zhang（备份）/RNA-seq/Cleandata<br><span class="hljs-meta prompt_">#</span><span class="language-bash">设置这一步的输出目录 (确保目录存在)</span><br>WORK=/home/jovyan/upload/zl_liu/star_data/yyz_01/output<br><span class="hljs-meta prompt_">#</span><span class="language-bash">设置index目录</span><br>INDEX=/home/jovyan/upload/zl_liu/star/index_150<br><span class="hljs-meta prompt_">#</span><span class="language-bash">设置参考文件目录</span><br>Reference=/home/jovyan/upload/zl_liu/star<br><br>echo $CLEAN&quot;, &quot;$WORK&quot;, &quot;$INDEX<br><br>export CDIR=$(basename `pwd`)<br>echo $CDIR<br>echo $CLEAN<br>for file in $CLEAN/*<br>do<br>echo $file<br>SAMPLE=$&#123;file##*/&#125;<br>echo $SAMPLE<br>r1=$&#123;SAMPLE&#125;&quot;_R1.fq.gz&quot;<br>r2=$&#123;SAMPLE&#125;&quot;_R2.fq.gz&quot;<br>echo $r1<br>echo $r2<br>cd $WORK&quot;/&quot;$SAMPLE<br>mkdir IIG<br><br>STAR \<br>--runMode genomeGenerate \<br>--genomeDir IIG \<br>--genomeFastaFiles $Reference&quot;/GRCh38.primary_assembly.genome.fa&quot; \<br>--sjdbOverhang 149 \<br>--runThreadN 4 \<br>--sjdbFileChrStartEnd SJ.out.tab \<br><br>done<br></code></pre></td></tr></table></figure>
+
+<h2 id="第五步-第二次对比"><a href="#第五步-第二次对比" class="headerlink" title="第五步 第二次对比"></a>第五步 第二次对比</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">#</span><span class="language-bash">!/bin/sh</span><br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">设置CleanData存放目录</span><br>CLEAN=/home/jovyan/upload/yy_zhang（备份）/RNA-seq/Cleandata<br><span class="hljs-meta prompt_">#</span><span class="language-bash">设置这一步的输出目录 (确保目录存在)</span><br>WORK=/home/jovyan/upload/zl_liu/star_data/yyz_01/output<br><span class="hljs-meta prompt_">#</span><span class="language-bash">设置index目录</span><br>INDEX=/home/jovyan/upload/zl_liu/star/index_150<br><span class="hljs-meta prompt_">#</span><span class="language-bash">设置参考文件目录</span><br>Reference=/home/jovyan/upload/zl_liu/star<br><br>echo $CLEAN&quot;, &quot;$WORK&quot;, &quot;$INDEX<br><br>export CDIR=$(basename `pwd`)<br>echo $CDIR<br>echo $CLEAN<br>for file in $CLEAN/*<br>do<br>echo $file<br>SAMPLE=$&#123;file##*/&#125;<br>echo $SAMPLE<br>r1=$&#123;SAMPLE&#125;&quot;_R1.fq.gz&quot;<br>r2=$&#123;SAMPLE&#125;&quot;_R2.fq.gz&quot;<br>echo $r1<br>echo $r2<br><br>cd $WORK&quot;/&quot;$SAMPLE&quot;/IIG&quot;<br>ln -s $INDEX/exonGeTrInfo.tab .<br>ln -s $INDEX/exonInfo.tab .<br>ln -s $INDEX/geneInfo.tab .<br>ln -s $INDEX/sjdbList.fromGTF.out.tab .<br>ln -s $INDEX/transcriptInfo.tab .<br><br>mkdir $WORK&quot;/&quot;$SAMPLE&quot;/Res&quot;<br>cd $WORK&quot;/&quot;$SAMPLE&quot;/Res&quot;<br><br>STAR \<br>--genomeDir ../IIG \<br>--readFilesIn $CLEAN/$SAMPLE/$r1&quot;,&quot;$CLEAN/$SAMPLE/$r2 \<br>--runThreadN 4 \<br>--quantMode TranscriptomeSAM GeneCounts \<br>--outFilterMultimapScoreRange 1 \<br>--outFilterMultimapNmax 20 \<br>--outFilterMismatchNmax 10 \<br>--alignIntronMax 500000 \<br>--alignMatesGapMax 1000000 \<br>--sjdbScore 2 \<br>--alignSJDBoverhangMin 1 \<br>--genomeLoad LoadAndRemove \<br>--limitBAMsortRAM  35000000000 \<br>--readFilesCommand zcat \<br>--outFilterMatchNminOverLread 0.33 \<br>--outFilterScoreMinOverLread 0.33 \<br>--sjdbOverhang 149 \<br>--outSAMstrandField intronMotif \<br>--outSAMattributes NH HI NM MD AS XS \<br>--outSAMunmapped Within \<br>--outSAMtype BAM SortedByCoordinate \<br>--outSAMheaderHD @HD VN:1.4 \<br>--outSAMattrRGline ID:sample SM:sample PL:ILLUMINA<br><br>done<br></code></pre></td></tr></table></figure>
+
+<h2 id="第六步-组装Counts文件"><a href="#第六步-组装Counts文件" class="headerlink" title="第六步 组装Counts文件"></a>第六步 组装Counts文件</h2><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs r"><span class="hljs-comment">#设置上一步的输出目录</span><br>WORK<span class="hljs-operator">=</span><span class="hljs-string">&#x27;/home/jovyan/upload/zl_liu/star_data/yyz_01/output&#x27;</span><br><span class="hljs-comment">#设置参考文件目录</span><br>Reference<span class="hljs-operator">=</span><span class="hljs-string">&#x27;/home/jovyan/upload/zl_liu/star&#x27;</span><br>Reference <span class="hljs-operator">=</span> file.path<span class="hljs-punctuation">(</span>Reference<span class="hljs-punctuation">,</span> <span class="hljs-string">&#x27;index_150&#x27;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&#x27;geneInfo.tab&#x27;</span><span class="hljs-punctuation">)</span><br>file_list <span class="hljs-operator">&lt;-</span> list.dirs<span class="hljs-punctuation">(</span>WORK<span class="hljs-punctuation">,</span> recursive<span class="hljs-operator">=</span><span class="hljs-built_in">F</span><span class="hljs-punctuation">,</span> full.names <span class="hljs-operator">=</span> <span class="hljs-built_in">F</span><span class="hljs-punctuation">)</span><br>geneN <span class="hljs-operator">&lt;-</span> read.table<span class="hljs-punctuation">(</span>file <span class="hljs-operator">=</span> Reference<span class="hljs-punctuation">,</span> sep <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;\t&#x27;</span><span class="hljs-punctuation">,</span> skip <span class="hljs-operator">=</span> <span class="hljs-number">1</span><span class="hljs-punctuation">)</span><br>colnames<span class="hljs-punctuation">(</span>geneN<span class="hljs-punctuation">)</span> <span class="hljs-operator">&lt;-</span> <span class="hljs-built_in">c</span><span class="hljs-punctuation">(</span><span class="hljs-string">&#x27;ID&#x27;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&#x27;symbol&#x27;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&#x27;type&#x27;</span><span class="hljs-punctuation">)</span><br><span class="hljs-keyword">for</span><span class="hljs-punctuation">(</span>sample <span class="hljs-keyword">in</span> file_list<span class="hljs-punctuation">)</span><span class="hljs-punctuation">&#123;</span><br>    test_tab <span class="hljs-operator">&lt;-</span> read.table<span class="hljs-punctuation">(</span>file <span class="hljs-operator">=</span> file.path<span class="hljs-punctuation">(</span>WORK<span class="hljs-punctuation">,</span> sample<span class="hljs-punctuation">,</span> <span class="hljs-string">&#x27;Res&#x27;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&#x27;ReadsPerGene.out.tab&#x27;</span><span class="hljs-punctuation">)</span> <span class="hljs-punctuation">,</span> sep <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;\t&#x27;</span><span class="hljs-punctuation">,</span> header <span class="hljs-operator">=</span> <span class="hljs-built_in">F</span><span class="hljs-punctuation">)</span><br>    test_tab <span class="hljs-operator">&lt;-</span> test_tab<span class="hljs-punctuation">[</span><span class="hljs-operator">-</span><span class="hljs-built_in">c</span><span class="hljs-punctuation">(</span><span class="hljs-number">1</span><span class="hljs-operator">:</span><span class="hljs-number">4</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">,</span> <span class="hljs-punctuation">]</span><br>    geneN<span class="hljs-punctuation">[</span>sample<span class="hljs-punctuation">]</span> <span class="hljs-operator">&lt;-</span> test_tab<span class="hljs-punctuation">[</span><span class="hljs-number">2</span><span class="hljs-punctuation">]</span><br><span class="hljs-punctuation">&#125;</span><br>write.csv<span class="hljs-punctuation">(</span>x <span class="hljs-operator">=</span> geneN<span class="hljs-punctuation">,</span> file <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;yyz_01.csv&#x27;</span><span class="hljs-punctuation">)</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs r">f_name_dedup <span class="hljs-operator">&lt;-</span> <span class="hljs-keyword">function</span><span class="hljs-punctuation">(</span>lc_exp<span class="hljs-punctuation">,</span> rowN <span class="hljs-operator">=</span> <span class="hljs-number">1</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">&#123;</span><br>    res <span class="hljs-operator">&lt;-</span> lc_exp<span class="hljs-punctuation">[</span><span class="hljs-operator">-</span>rowN<span class="hljs-punctuation">]</span><br>    lc_tmp <span class="hljs-operator">=</span> by<span class="hljs-punctuation">(</span>res<span class="hljs-punctuation">,</span><br>         lc_exp<span class="hljs-punctuation">[[</span>rowN<span class="hljs-punctuation">]</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span><br>         <span class="hljs-keyword">function</span><span class="hljs-punctuation">(</span>x<span class="hljs-punctuation">)</span> rownames<span class="hljs-punctuation">(</span>x<span class="hljs-punctuation">)</span><span class="hljs-punctuation">[</span>which.max<span class="hljs-punctuation">(</span>rowMeans<span class="hljs-punctuation">(</span>x<span class="hljs-punctuation">)</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">)</span><br>    lc_probes <span class="hljs-operator">=</span> <span class="hljs-built_in">as.character</span><span class="hljs-punctuation">(</span>lc_tmp<span class="hljs-punctuation">)</span><br>    res <span class="hljs-operator">=</span> lc_exp<span class="hljs-punctuation">[</span>rownames<span class="hljs-punctuation">(</span>res<span class="hljs-punctuation">)</span> <span class="hljs-operator">%in%</span> lc_probes<span class="hljs-punctuation">,</span><span class="hljs-punctuation">]</span><br>    rownames<span class="hljs-punctuation">(</span>res<span class="hljs-punctuation">)</span> <span class="hljs-operator">&lt;-</span> res<span class="hljs-punctuation">[[</span>rowN<span class="hljs-punctuation">]</span><span class="hljs-punctuation">]</span><br>    res<span class="hljs-punctuation">[</span><span class="hljs-operator">-</span>rowN<span class="hljs-punctuation">]</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="第七步-删除临时文件"><a href="#第七步-删除临时文件" class="headerlink" title="第七步 删除临时文件"></a>第七步 删除临时文件</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">#</span><span class="language-bash">!/bin/sh</span><br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash">设置CleanData存放目录</span><br>CLEAN=/home/jovyan/upload/yy_zhang（备份）/RNA-seq/Cleandata<br><span class="hljs-meta prompt_">#</span><span class="language-bash">设置这一步的输出目录 (确保目录存在)</span><br>WORK=/home/jovyan/upload/zl_liu/star_data/yyz_01/output<br><br>for file in $CLEAN/*<br>do<br>echo $file<br>SAMPLE=$&#123;file##*/&#125;<br>echo $SAMPLE<br><br>rm -rf $WORK&quot;/&quot;$SAMPLE&quot;/IIG&quot;<br><br>done<br></code></pre></td></tr></table></figure>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%BB%84%E7%BB%87%E6%B5%8B%E5%BA%8F/" class="category-chain-item">组织测序</a>
+  
+  
+
+      </span>
+    
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%94%9F%E4%BF%A1/" class="category-chain-item">生信</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>按TCGA的STAR流程处理组织高通量测序数据</div>
+      <div>https://occdn.limour.top/1662.html</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>Limour</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>April 6, 2022</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="NC - Non-commercial">
+                    <i class="iconfont icon-nc"></i>
+                  </span>
+                </a>
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="SA - Share-alike">
+                    <i class="iconfont icon-sa"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/1677.html" title="Docker：rstudio-server">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Docker：rstudio-server</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/1658.html" title="RRA算法聚合生物学重复结果">
+                        <span class="hidden-mobile">RRA算法聚合生物学重复结果</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="waline"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#waline', function() {
+      Fluid.utils.createCssLink('https://cdn.staticfile.org/waline/2.15.5/waline.min.css')
+      Fluid.utils.createScript('https://cdn.staticfile.org/waline/2.15.5/waline.min.js', function() {
+        var options = Object.assign(
+          {"serverURL":"https://comments.limour.top","path":"window.location.pathname","meta":["nick","mail","link"],"requiredMeta":["nick"],"lang":"zh-CN","emoji":["https://jscdn.limour.top/gh/walinejs/emojis/weibo"],"dark":"html[data-user-color-scheme=\"dark\"]","wordLimit":0,"pageSize":10},
+          {
+            el: '#waline',
+            path: window.location.pathname
+          }
+        )
+        Waline.init(options);
+        Fluid.utils.waitElementVisible('#waline .vcontent', () => {
+          var imgSelector = '#waline .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a target="_blank" rel="nofollow noopener" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=43130202000203"><img src="https://img.limour.top/2023/08/27/64eadeb81d6a0.webp" srcset="https://jscdn.limour.top/gh/Limour-dev/Sakurairo_Vision/load_svg/inload.svg" lazyload>湘公网安备 43130202000203号  </a> <a target="_blank" rel="nofollow noopener" href="https://beian.miit.gov.cn/">湘ICP备20008299号 </a> <a target="_blank" rel="nofollow noopener" href="https://icp.gov.moe/?keyword=20210128">萌ICP备20210128号</a> <br> <a href="https://www.foreverblog.cn/" target="_blank"> <img src="https://img.foreverblog.cn/logo_en_default.png" srcset="https://jscdn.limour.top/gh/Limour-dev/Sakurairo_Vision/load_svg/inload.svg" lazyload alt="" style="width:auto;height:24px"> </a> <br> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/limour-blog/archives-occdn" target="_blank" rel="nofollow noopener"><span>SRC</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://jscdn.limour.top/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://jscdn.limour.top/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://jscdn.limour.top/npm/jquery@3.6.4/dist/jquery.min.js" ></script>
+<script  src="https://jscdn.limour.top/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://jscdn.limour.top/npm/tocbot@4.20.1/dist/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://jscdn.limour.top/npm/anchor-js@4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+<!-- hexo injector body_end start -->
+  <script defer src="/theme-inject/timeliness.js"></script>
+<!-- hexo injector body_end end --></body>
+</html>
