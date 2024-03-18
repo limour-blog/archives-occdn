@@ -18,7 +18,7 @@ date: 2022-05-01 15:54:51
 
 GRCh38\_rmsk.gtf.gz：[https://genome.ucsc.edu/cgi-bin/hgTables](https://genome.ucsc.edu/cgi-bin/hgTables?hgsid=611454127_NtvlaW6xBSIRYJEBI0iRDEWisITa&clade=mammal&org=Human&db=0&hgta_group=allTracks&hgta_track=rmsk&hgta_table=rmsk&hgta_regionType=genome&position=&hgta_outputType=gff&hgta_outFileName=GRCh38_rmsk.gtf)
 
-![](https://img-cdn.limour.top/blog/20220501140947.png)
+![](https://img.limour.top/archives_2023/blog/20220501140947.webp)
 
 *   cd /opt/cellranger
 *   wget <Cell Ranger>

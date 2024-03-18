@@ -8,7 +8,7 @@ categories:
 date: 2022-04-06 10:00:14
 ---
 
-![](https://img-cdn.limour.top/blog/20220404172423.png)
+![](https://img.limour.top/archives_2023/blog/20220404172423.webp)
 
 流程：[https://docs.gdc.cancer.gov/Data/Bioinformatics\_Pipelines/Expression\_mRNA\_Pipeline/](https://docs.gdc.cancer.gov/Data/Bioinformatics_Pipelines/Expression_mRNA_Pipeline/)
 
@@ -49,7 +49,7 @@ STAR \
 
 ## 第三步 第一次对比
 
-![](https://img-cdn.limour.top/blog/20220405043153.png)
+![](https://img.limour.top/archives_2023/blog/20220405043153.webp)
 
 CleanData存放格式
 

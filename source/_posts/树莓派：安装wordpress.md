@@ -20,7 +20,7 @@ date: 2022-07-09 13:07:12
 *   新建站点，域名写127.0.0.1:15080，php版本选php80
 *   站点设置-配置文件里添加以下内容
 
-![](https://img-cdn.limour.top/blog/202205260049.jpg)
+![](https://img.limour.top/archives_2023/blog/202205260049.jpg)
 
 ```nginx
     sub_filter_once off;

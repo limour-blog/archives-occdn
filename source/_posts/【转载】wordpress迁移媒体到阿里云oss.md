@@ -38,4 +38,4 @@ date: 2022-07-10 04:54:01
 
 ## 第四步 重写链接
 
-![](https://img-cdn.limour.top/blog/20220710045326.png)
+![](https://img.limour.top/archives_2023/blog/20220710045326.webp)

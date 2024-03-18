@@ -275,7 +275,7 @@ for(sample in file_list){
 write.csv(x = geneN, file = 'XL789vs123.csv')
 ```
 
-![](https://img-cdn.limour.top/blog/20220702142511.png)
+![](https://img.limour.top/archives_2023/blog/20220702142511.webp)
 
 组装的Counts文件格式
 

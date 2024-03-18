@@ -53,15 +53,15 @@ end
 
 ## 第四步 准备虚拟网络服务
 
-![](https://img-cdn.limour.top/blog/20220608154418.png)
+![](https://img.limour.top/archives_2023/blog/20220608154418.webp)
 
 1、确保openwrt虚拟机网络在VMnet8上
 
-![](https://img-cdn.limour.top/blog/20220608155404.png)
+![](https://img.limour.top/archives_2023/blog/20220608155404.webp)
 
 2、配置VMnet8的子网到169.254.31.0 (这里DHCP忘勾上了，也勾上)
 
-![](https://img-cdn.limour.top/blog/20220608163144.png)
+![](https://img.limour.top/archives_2023/blog/20220608163144.webp)
 
 3、配置电脑网络适配器的VMnet8，留出169.254.31.1的地址
 
@@ -76,7 +76,7 @@ end
 *   手机开热点，电脑连接，确保有互联网访问
 *   开启电脑热点
 
-![](https://img-cdn.limour.top/blog/20220608164112.png)
+![](https://img.limour.top/archives_2023/blog/20220608164112.webp)
 
 修改VMnet8的适配器选项，将其通过前面电脑的热点进行共享
 

@@ -19,13 +19,13 @@ https://www.xiaoc.cn/article/2022\_03\_11/437.html
 
 ## 第一步 建立代理
 
-![](https://img-cdn.limour.top/blog/20220708105620.png)
+![](https://img.limour.top/archives_2023/blog/20220708105620.webp)
 
 关闭缓存，不强制SSL
 
 ## 第二步 建立正常的反向代理
 
-![](https://img-cdn.limour.top/blog/20220708132859.png)
+![](https://img.limour.top/archives_2023/blog/20220708132859.webp)
 
 注意NGINX的‘/’
 
@@ -45,7 +45,7 @@ resolver 8.8.8.8;
 
 ## 第三步 建立替换的反向代理
 
-![](https://img-cdn.limour.top/blog/20220708133144.png)
+![](https://img.limour.top/archives_2023/blog/20220708133144.webp)
 
 ```nginx
 expires 30d;
@@ -62,7 +62,7 @@ sub_filter "jscdn.limour.top" "jscdn.limour.top";
 
 ## 第四步 建立压缩的反向代理
 
-![](https://img-cdn.limour.top/blog/20220708133315.png)
+![](https://img.limour.top/archives_2023/blog/20220708133315.webp)
 
 ```nginx
 expires 30d;

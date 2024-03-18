@@ -20,7 +20,7 @@ date: 2022-02-17 15:36:50
 *   权限管理-**访问控制RAM** 设置好子账号，访问方式为 "Open API 调用访问"
 *   RAM 访问控制-身份管理-用户-添加权限，给予 "AliyunOSSFullAccess" 权限
 
-![](https://img-cdn.limour.top/blog/20220219191908.png)
+![](https://img.limour.top/archives_2023/blog/20220219191908.webp)
 
 Referer示例
 
@@ -54,4 +54,4 @@ ProxyPassReverse / http://limour-img.oss-cn-shanghai-internal.aliyuncs.com/
 *   Bucket-权限管理-**Bucket 授权策略** 指定ip为自己的阿里云服务器
 *   **注意：该ip须为内网ip，不能是公网ip，一般为 172 开头**
 
-![授权页面](https://img-cdn.limour.top/20220217004941.png)
+![授权页面](https://img.limour.top/archives_2023/20220217004941.webp)

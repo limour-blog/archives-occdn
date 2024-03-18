@@ -224,4 +224,4 @@ acme.sh --install-cert -d *.limour.top \
 --reloadcmd     "systemctl restart httpd"
 ```
 
-![](https://img-cdn.limour.top/blog/image-3.png)
+![](https://img.limour.top/archives_2023/blog/image-3.webp)

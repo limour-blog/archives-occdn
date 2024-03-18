@@ -15,7 +15,7 @@ date: 2022-06-30 00:58:07
 *   sudo smbclient //192.168.1.1/<samba> -U 用户名%密码
 *   其中的<samba>可能的值：samba、share、public、home、usbshare等等，为Sharename显示的结果
 
-![](https://img-cdn.limour.top/blog/20220630004511.png)
+![](https://img.limour.top/archives_2023/blog/20220630004511.webp)
 
 √的是需要的，×的地方忽略它
 

@@ -14,7 +14,7 @@ date: 2022-02-17 19:25:08
 
 ## 第二步 新建一个纯静态站点
 
-![](https://img-cdn.limour.top/blog/20220217191358.png)
+![](https://img.limour.top/archives_2023/blog/20220217191358.webp)
 
 **域名为博客域名，如 occdn.limour.top**
 

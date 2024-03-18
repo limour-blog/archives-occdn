@@ -28,7 +28,7 @@ date: 2022-02-22 17:16:23
 
 ## 第三步 设置CF规则
 
-![](https://img-cdn.limour.top/blog/20220222180442.png)
+![](https://img.limour.top/archives_2023/blog/20220222180442.webp)
 
 [https://cloud.tencent.com/developer/article/1774198](https://cloud.tencent.com/developer/article/1774198)
 

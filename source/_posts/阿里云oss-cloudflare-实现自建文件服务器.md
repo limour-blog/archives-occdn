@@ -38,4 +38,4 @@ ProxyPassReverse / http://limour-file.oss-cn-shanghai-internal.aliyuncs.com/
 *   Bucket-权限管理-**Bucket 授权策略** 指定ip为自己的阿里云服务器
 *   **注意：该ip须为内网ip，不能是公网ip，一般为 172 开头**
 
-![](https://img-cdn.limour.top/20220217004941.png)
+![](https://img.limour.top/archives_2023/20220217004941.webp)

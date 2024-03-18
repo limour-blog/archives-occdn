@@ -46,14 +46,14 @@ pghp8GVQ94JcS5fmtZqX1yx0hBU4qZ0skIJr5D2M0BmhCBQ9Kulv2YDL
 -----END PRIVATE KEY-----
 ```
 
-![](https://img-cdn.limour.top/blog/image.png)
+![](https://img.limour.top/archives_2023/blog/image.webp)
 
 **第二步 部署假页面并使用假证书**
 
-![](https://img-cdn.limour.top/blog/image-1.png)
+![](https://img.limour.top/archives_2023/blog/image-1.webp)
 
 **第三步 修改默认站点**
 
-![](https://img-cdn.limour.top/blog/image-2.png)
+![](https://img.limour.top/archives_2023/blog/image-2.webp)
 
 **第四步 修改默认站点的返回代码为444**

@@ -13,14 +13,14 @@ date: 2022-05-26 00:36:39
 *   安装fileinfo、opcache、redis、imagemagick、exif拓展
 *   设置display\_errors为off
 
-![](https://img-cdn.limour.top/blog/20220526001647.png)
+![](https://img.limour.top/archives_2023/blog/20220526001647.webp)
 
 ## Nginx相关
 
 *   网站允许重写，设置替换规则
 *   反向代理JSD
 
-![](https://img-cdn.limour.top/blog/202205260049.jpg)
+![](https://img.limour.top/archives_2023/blog/202205260049.jpg)
 
 ```nginx
     sub_filter_once off;
@@ -33,7 +33,7 @@ date: 2022-05-26 00:36:39
     }
 ```
 
-![](https://img-cdn.limour.top/blog/20220526002139.png)
+![](https://img.limour.top/archives_2023/blog/20220526002139.webp)
 
 ```nginx
 #PROXY-START/
@@ -63,7 +63,7 @@ location ^~ /
 
 *   给网站套CDN打补丁
 
-![](https://img-cdn.limour.top/blog/20220526002358.png)
+![](https://img.limour.top/archives_2023/blog/20220526002358.webp)
 
 ```php
 // 判断是否访问请求经过代理

@@ -11,7 +11,7 @@ date: 2022-02-17 19:38:38
 
 *   管理后台-设置-常规
 
-![](https://img-cdn.limour.top/blog/20220217192801.png)
+![](https://img.limour.top/archives_2023/blog/20220217192801.webp)
 
 ## 第二步 通过宝塔修改 wp-config.php
 
@@ -29,7 +29,7 @@ if (strpos($_SERVER['HTTP_X_FORWARDED_PROTO'], 'https') !== false){
 }
 ```
 
-![](https://img-cdn.limour.top/blog/20220217193010.png)
+![](https://img.limour.top/archives_2023/blog/20220217193010.webp)
 
 ## 第三步 关闭非443端口的公网访问
 
@@ -43,7 +43,7 @@ if (strpos($_SERVER['HTTP_X_FORWARDED_PROTO'], 'https') !== false){
 
 *   wget --delete-after http://127.0.0.1:5080/wp-cron.php
 
-![](https://img-cdn.limour.top/blog/20220217193804.png)
+![](https://img.limour.top/archives_2023/blog/20220217193804.webp)
 
 ## 第五步 解决CDN掩盖访客IP问题
 

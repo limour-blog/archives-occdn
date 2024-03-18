@@ -13,19 +13,19 @@ date: 2022-06-25 15:45:36
 
 ## 第一步 openwrt接入zerotier网络
 
-![](https://img-cdn.limour.top/blog/20220625153622.png)
+![](https://img.limour.top/archives_2023/blog/20220625153622.webp)
 
 **注意开启准入控制里的两项，否则其他设备无法访问内网，只能访问路由**
 
 ## 第二步 zerotier网络配置网关
 
-![](https://img-cdn.limour.top/blog/20220625153939.png)
+![](https://img.limour.top/archives_2023/blog/20220625153939.webp)
 
 同时记住网关的zerotier内网ip，这里是192.168.191.198
 
 ## 第三步 zerotier网络配置路由表
 
-![](https://img-cdn.limour.top/blog/20220625154244.png)
+![](https://img.limour.top/archives_2023/blog/20220625154244.webp)
 
 **Destination**为openwrt内网的ip段，**via**为第二步记住的openwrt网关在zerotier内网的ip
 

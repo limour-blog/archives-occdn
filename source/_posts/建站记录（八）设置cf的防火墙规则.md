@@ -7,9 +7,9 @@ categories:
 date: 2022-02-23 23:53:44
 ---
 
-![](https://img-cdn.limour.top/blog/20220223235010.png)
+![](https://img.limour.top/archives_2023/blog/20220223235010.webp)
 
-![](https://img-cdn.limour.top/blog/20220223235135.png)
+![](https://img.limour.top/archives_2023/blog/20220223235135.webp)
 
 ## 更好的方式
 
